@@ -15,8 +15,8 @@ steps:
     password:
       from_secret: docker_password
     repo: gmetrixr/redisinsight
-    context: context
-    dockerfile: context/Dockerfile
+    context: .
+    dockerfile: ./Dockerfile
     tags:
     - ${DRONE_BRANCH//\//-}-v1
 
