@@ -1,0 +1,25 @@
+---
+kind: pipeline
+type: docker
+name: docker
+
+# https://docs.drone.io/pipeline/environment/reference/
+steps:
+- name: docker-push
+  image: plugins/docker
+  environment:
+    DOCKER_BUILDKIT: 1
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: gmetrixr/redisinsight
+    context: context
+    dockerfile: context/Dockerfile
+    tags:
+    - ${DRONE_BRANCH//\//-}-v1
+
+trigger:
+  event: [push]
+
